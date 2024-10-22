@@ -19,7 +19,8 @@
           <p>Edit Profile</p> 
         </a> 
       </li> 
-      @if(Auth::user() && Auth::user()->role == 'ADM')
+
+      @if(Auth::user()->level->level_id == 1)
       <li class="nav-header">Data Pengguna</li> 
       <li class="nav-item"> 
         <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level')? 
@@ -36,8 +37,10 @@
         </a> 
       </li> 
       @endif
+
       <li class="nav-header">Data Barang</li> 
-      @if(Auth::user() && Auth::user()->role == 'ADM')
+      
+      @if(Auth::user()->level->level_id == 1)
       <li class="nav-item"> 
         <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu == 
 'kategori')? 'active' : '' }} "> 
@@ -46,7 +49,8 @@
         </a> 
       </li> 
       @endif
-      @if(Auth::user() && Auth::user()->role == 'ADM' || 'MNG')
+
+      @if(Auth::user()->level->level_id == 1 || 2)
       <li class="nav-item"> 
         <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 
 'barang')? 'active' : '' }} "> 
@@ -55,7 +59,8 @@
         </a> 
       </li> 
       @endif
-      @if(Auth::user() && Auth::user()->role == 'ADM' || 'MNG' || 'STF')
+
+      @if(Auth::user()->level->level_id == 1 || 2 || 3)
       <li class="nav-item"> 
         <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 
 'supplier')? 'active' : '' }} "> 
@@ -64,7 +69,8 @@
         </a> 
       </li> 
       @endif
-      @if(Auth::user() && Auth::user()->role == 'ADM' || 'MNG' || 'STF')
+
+      @if(Auth::user()->level->level_id == 1 || 2 || 3)
       <li class="nav-header">Data Transaksi</li> 
       <li class="nav-item"> 
         <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 
@@ -81,6 +87,7 @@
         </a> 
       </li> 
       @endif
+      
       <li class="nav-item" id="logout"> 
         <a href="{{ url('/logout') }}" class="nav-link {{ ($activeMenu == 
 'penjualan')? 'active' : '' }} "> 
