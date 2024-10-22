@@ -46,10 +46,6 @@
                                         <label for="nama">Nama</label>
                                         <input type="text" class="form-control" id="nama" name="nama" value="{{ Auth::user()->nama }}" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="level_nama">Level Pengguna</label>
-                                        <input type="text" class="form-control" id="level_nama" value="{{ Auth::user()->level->level_nama }}" disabled>
-                                    </div>
                                     <div class="form-group text-right mt-4">
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>

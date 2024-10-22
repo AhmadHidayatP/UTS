@@ -1,4 +1,4 @@
-<form action="{{ url('/supplier/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/supplier_ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>supplier Kode</label>
+                    <label>Supplier Kode</label>
                     <input value="" type="text" name="supplier_kode" id="supplier_kode" class="form-control" required>
                     <small id="error-supplier_kode" class="error-text form-text text-danger"></small>
                 </div>
@@ -31,7 +31,7 @@
             rules: {
                 supplier_kode: {
                     required: true,
-                    minlength: 3,
+                    minlength: 2,
                     maxlength: 20
                 },
                 supplier_nama: {

@@ -8,16 +8,6 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Nama Supplier</label>
-                    <select name="supplier_id" id="supplier_id" class="form-control" required>
-                        <option value="">- Pilih Supplier -</option>
-                        @foreach ($supplier as $l)
-                            <option value="{{ $l->supplier_id }}">{{ $l->supplier_nama }}</option>
-                        @endforeach
-                    </select>
-                    <small id="error-supplier_id" class="error-text form-text text-danger"></small>
-                </div>
-                <div class="form-group">
                     <label>Nama Barang</label>
                     <select name="barang_id" id="barang_id" class="form-control" required>
                         <option value="">- Pilih Barang -</option>
@@ -59,10 +49,6 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                supplier_id: {
-                    required: true,
-                    number: true
-                },
                 barang_id: {
                     required: true,
                     number: true

@@ -87,8 +87,8 @@ MALANG</span>
             @foreach($kategori as $k) 
             <tr> 
                 <td class="text-center">{{ $loop->iteration }}</td> 
-                <td>{{ $k->kategori_kode }}</td> 
-                <td>{{ $k->kategori_nama }}</td> 
+                <td class="text-center">{{ $k->kategori_kode }}</td> 
+                <td class="text-center">{{ $k->kategori_nama }}</td> 
             </tr>
             @endforeach 
 </tbody> 

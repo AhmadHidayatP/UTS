@@ -79,7 +79,7 @@
                         },
                         barang_kode: {
                             required: true,
-                            minlength: 3,
+                            minlength: 2,
                             maxlength: 20
                         },
                         barang_nama: {

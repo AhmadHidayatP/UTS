@@ -150,8 +150,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/kategori/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']);
         Route::put('/kategori/{id}/update_ajax', [KategoriController::class, 'update_ajax']);
         Route::get('/kategori/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']);
-        Route::delete('/kateg
-        ori/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
+        Route::delete('/kategori/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
         Route::get('/kategori/export_excel', [KategoriController::class, 'export_excel']);
         Route::get('/kategori/export_pdf', [KategoriController::class, 'export_pdf']);
         Route::get('/kategori/{id}/show_ajax', [KategoriController::class, 'show_ajax']);

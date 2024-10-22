@@ -66,7 +66,7 @@ class KategoriController extends Controller
     {
         $request->validate([
 
-            'kategori_kode' => 'required|string|min:3|max:10|unique:m_kategori,kategori_kode', // kategori_kode harus diisi, berupa string, minimal 3 karakter, maks 10 dan bernilai unik
+            'kategori_kode' => 'required|string|min:2|max:10|unique:m_kategori,kategori_kode', // kategori_kode harus diisi, berupa string, minimal 3 karakter, maks 10 dan bernilai unik
             'kategori_nama' => 'required|string|max:100' //nama harus diisi, berupa string, dan maksimal 100 karakter
         ]);
         KategoriModel::create([
@@ -104,7 +104,7 @@ class KategoriController extends Controller
         $request->validate([
             // username harus diisi, berupa string, minimal 3 karakter,
             // dan bernilai unik di tabel_kategori kolom username kecuali untuk kategori dengan id yang sedang diedit
-            'kategori_kode' => 'required|string|min:3|max:10|unique:m_kategori,kategori_kode,' . $id . ',kategori_id',
+            'kategori_kode' => 'required|string|min:2|max:10|unique:m_kategori,kategori_kode,' . $id . ',kategori_id',
             'kategori_nama' => 'required|string|max:100' // nama harus diisi, berupa string, dan maksimal 100 karakter
         ]);
         kategoriModel::find($id)->update([
@@ -139,7 +139,7 @@ class KategoriController extends Controller
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'kategori_kode'    => 'required|string|min:3|unique:m_kategori,kategori_kode',
+                'kategori_kode'    => 'required|string|min:2|unique:m_kategori,kategori_kode',
                 'kategori_nama'    => 'required|string|max:100',
             ];
             // use Illuminate\Support\Facades\Validator;

@@ -146,7 +146,8 @@ class SupplierController extends Controller
 
     public function create_ajax()
     {
-        return view('supplier.create_ajax');
+        $supplier = SupplierModel::select('supplier_id', 'supplier_nama')->get(); 
+        return  view('supplier.create_ajax');
     }
 
     public function update_ajax(Request $request, $id)
@@ -219,9 +220,8 @@ class SupplierController extends Controller
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'supplier_kode'    => 'required|string|min:3|unique:m_supplier,supplier_kode',
-                'supplier_nama'    => 'required|string|max:100',
-                'supplier_alamat' => 'required|string|max:100'
+                'supplier_kode'    => 'required|string|min:2',
+                'supplier_nama'    => 'required|string|max:100'
             ];
             // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);

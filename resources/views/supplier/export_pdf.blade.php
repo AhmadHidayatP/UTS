@@ -80,7 +80,7 @@ MALANG</span>
             <tr> 
                 <th class="text-center">No</th> 
                 <th>Kode Supplier</th> 
-                <th class="text-right">Nama Supplier</th> 
+                <th>Nama Supplier</th> 
             </tr> 
         </thead> 
         <tbody> 

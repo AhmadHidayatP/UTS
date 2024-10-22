@@ -1,21 +1,36 @@
-<form action="{{ url('/kategori_ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/penjualan/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data kategori</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Penjualan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>kategori Kode</label>
-                    <input value="" type="text" name="kategori_kode" id="kategori_kode" class="form-control" required>
-                    <small id="error-kategori_kode" class="error-text form-text text-danger"></small>
+                    <label>Level Pengguna</label>
+                    <select name="user_id" id="user_id" class="form-control" required>
+                        <option value="">- Pilih User -</option>
+                        @foreach ($user as $l)
+                            <option value="{{ $l->user_id }}">{{ $l->nama }}</option>
+                        @endforeach
+                    </select>
+                    <small id="error-level_id" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Nama kategori</label>
-                    <input value="" type="text" name="kategori_nama" id="kategori_nama" class="form-control" required>
-                    <small id="error-kategori_nama" class="error-text form-text text-danger"></small>
+                    <label>Pembeli</label>
+                    <input value="" type="text" name="pembeli" id="pembeli" class="form-control" required>
+                    <small id="error-pembeli" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Kode Penjualan</label>
+                    <input value="" type="text" name="penjualan_kode" id="penjualan_kode" class="form-control" required>
+                    <small id="error-nama" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Penjualan</label>
+                    <input value="" type="datetime-local" name="penjualan_tanggal" id="penjualan_tanggal" class="form-control" required>
+                    <small id="error-password" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -29,15 +44,23 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                kategori_kode: {
+                user_id: {
                     required: true,
-                    minlength: 2,
-                    maxlength: 20
+                    number: true
                 },
-                kategori_nama: {
+                pembeli: {
                     required: true,
                     minlength: 3,
-                    maxlength: 100
+                    maxlength: 50
+                },
+                penjualan_kode: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                },
+                penjualan_tanggal: {
+                    required: true,
+                    date: true
                 }
             },
             submitHandler: function(form) {
@@ -53,7 +76,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataKategori.ajax.reload();
+                            dataPenjualan.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

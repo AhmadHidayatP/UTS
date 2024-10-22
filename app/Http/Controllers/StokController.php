@@ -176,7 +176,8 @@ class StokController extends Controller
     public function export_excel()
     {
         $stok = StokModel::select('stok_id', 'barang_id', 'user_id', 'stok_tanggal', 'stok_jumlah')
-            ->with('barang', 'user');
+            ->with('barang', 'user')
+            ->get();
             
             $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
@@ -219,9 +220,10 @@ class StokController extends Controller
     public function export_pdf()
     {
         $stok = StokModel::select('stok_id', 'barang_id', 'user_id', 'stok_tanggal', 'stok_jumlah')
-            ->with('barang', 'user');
+            ->with('barang', 'user')
+            ->get();
 
-        $pdf = Pdf::loadView('stok.export_pdf', ['stok' => $stok]);
+        $pdf = PDF::loadView('stok.export_pdf', ['stok' => $stok]);
         $pdf->setPaper ('a4', 'portrait'); // set ukuran kertas dan orientasi
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url $pdf->render();
         return $pdf->stream ('Data Stok '.date('Y-m-d H:i:s').'.pdf');

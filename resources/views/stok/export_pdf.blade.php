@@ -82,7 +82,6 @@ MALANG</span>
                     <th>Nama User</th>
                     <th>Tanggal Stok</th>
                     <th>Jumlah Stok</th>
-                    <th>Aksi</th>
             </tr> 
         </thead> 
         <tbody> 
