@@ -35,31 +35,29 @@ class ProfileController extends Controller
     public function update_profile(Request $request)
     {
         $request->validate([
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // Validasi file gambar
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // Validate image file
         ]);
 
-        // Mendapatkan ID pengguna yang sedang login
+        // Get the logged-in user's ID
         $userId = Auth::id();
-
-        // Mengambil pengguna berdasarkan ID menggunakan UserModel
         $user = UserModel::find($userId);
 
-        // Jika ada file gambar yang diupload
+        // If there's an uploaded image
         if ($request->hasFile('avatar')) {
-            // Hapus foto profil lama jika ada
+            // Delete old profile picture if it exists
             if ($user->avatar && Storage::exists('public/' . $user->avatar)) {
                 Storage::delete('public/' . $user->avatar);
             }
 
-            // Simpan foto profil baru
-            $path = $request->file('avatar')->store('gambar', 'public');
-            $user->avatar = $path;
+            // Store new profile picture publicly
+            $path = $request->file('avatar')->store('images/profiles', 'public');
+            $user->avatar = $path; // Save the path to the database
         }
 
-        // Simpan perubahan ke database
+        // Save changes to the database
         $user->save();
 
-        return redirect()->back()->with('success', 'Foto profil berhasil diperbarui');
+        return redirect()->back()->with('success', 'Profile picture updated successfully');
     }
 
     public function update_pengguna(Request $request, string $id)

@@ -124,6 +124,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/user/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
         Route::put('/user/{id}/update_ajax', [UserController::class, 'update_ajax']);
         Route::get('/user/{id}/delete_ajax', [UserController::class, 'confirm_ajax']);
+        Route::delete('/user/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
         Route::get('/user/export_excel', [UserController::class, 'export_excel']);
         Route::get('/user/export_pdf', [UserController::class, 'export_pdf']);
         Route::get('/user/{id}/show_ajax', [UserController::class, 'show_ajax']);

@@ -154,11 +154,12 @@ class LevelController extends Controller
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'level_kode'    => 'required|string|min:3|unique:m_level,level_kode',
-                'level_nama'    => 'required|string|max:100',
+                'level_kode' => 'required|string|min:3|max:10|unique:m_level,level_kode',
+                'level_nama' => 'required|string|max:100'
             ];
             // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
+
             if ($validator->fails()) {
                 return response()->json([
                     'status'    => false, // response status, false: error/gagal, true: berhasil
@@ -175,7 +176,6 @@ class LevelController extends Controller
         redirect('/');
     }
 
-    // Menampilkan halaman form edit level ajax
     public function edit_ajax(string $id)
     {
         $level = LevelModel::find($id);
@@ -215,6 +215,7 @@ class LevelController extends Controller
         }
         return redirect('/');
     }
+
     public function confirm_ajax(string $id)
     {
         $level = LevelModel::find($id);

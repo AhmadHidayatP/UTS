@@ -20,97 +20,82 @@
                         </div>
                     </div>
 
-                    <!-- Tab Navigation -->
-                    <ul class="nav nav-menu_profil mb-0" id="profileTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link {{ session('error_type') ? '' : 'active' }}" id="data-tab" data-toggle="tab" href="#data-pengguna" role="tab" aria-controls="data-pengguna" aria-selected="true">Data Pengguna</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ session('error_type') ? 'active' : '' }}" id="password-tab" data-toggle="tab" href="#ubah-password" role="tab" aria-controls="ubah-password" aria-selected="false">Ubah Password</a>
-                        </li>
-                    </ul>
+                    <!-- AJAX Notification Alerts -->
+                    <div id="notification-success" class="alert alert-success" style="display:none"></div>
+                    <div id="notification-error" class="alert alert-danger" style="display:none"></div>
 
-                    <!-- Tab Content -->
-                    <div class="tab-content" id="profileTabContent">
-                        <!-- Data Pengguna -->
-                        <div class="tab-pane fade {{ session('error_type') ? '' : 'show active' }}" id="data-pengguna" role="tabpanel" aria-labelledby="data-tab">
-                            <div class="container border-container">
-                                <form id="profile-form" method="POST" action="{{ url('profile/update_pengguna', Auth::user()->user_id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="form-group mt-4">
-                                        <label for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" value="{{ Auth::user()->username }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" value="{{ Auth::user()->nama }}" required>
-                                    </div>
-                                    <div class="form-group text-right mt-4">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </form>
+                    <!-- Form for Data Pengguna and Ubah Password -->
+                    <form id="profile-form" method="POST" action="{{ url('profile/update_pengguna', Auth::user()->user_id) }}">
+                        @csrf
+                        @method('PUT')
+
+                        <!-- Data Pengguna Section -->
+                        <div class="container border-container">
+                            <h5>Data Pengguna</h5>
+                            <div class="form-group mt-4">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ Auth::user()->username }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" id="nama" name="nama" value="{{ Auth::user()->nama }}" required>
                             </div>
                         </div>
 
-                        <!-- Ubah Password -->
-                        <div class="tab-pane fade {{ session('error_type') ? 'show active' : '' }}" id="ubah-password" role="tabpanel" aria-labelledby="password-tab">
-                            <div class="container border-container">
-                                <form id="password-form" method="POST" action="{{ url('profile/update_password', Auth::user()->user_id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="form-group mt-4">
-                                        <label for="current_password">Password Lama</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="current_password" name="current_password" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text toggle-password" toggle="#current_password">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <small id="error-current_password" class="error-text form-text text-danger">
-                                            @error('current_password') {{ $message }} @enderror
-                                        </small>
+                        <!-- Ubah Password Section -->
+                        <div class="container border-container mt-4">
+                            <h5>Ubah Password</h5>
+                            <div class="form-group mt-4">
+                                <label for="current_password">Password Lama</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="current_password" name="current_password">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text toggle-password" toggle="#current_password">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
                                     </div>
+                                </div>
+                                <small id="error-current_password" class="error-text form-text text-danger">
+                                    @error('current_password') {{ $message }} @enderror
+                                </small>
+                            </div>
 
-                                    <div class="form-group">
-                                        <label for="new_password">Password Baru</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="new_password" name="new_password" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text toggle-password" toggle="#new_password">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <small id="error-new_password" class="error-text form-text text-danger">
-                                            @error('new_password') {{ $message }} @enderror
-                                        </small>
+                            <div class="form-group">
+                                <label for="new_password">Password Baru</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="new_password" name="new_password">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text toggle-password" toggle="#new_password">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
                                     </div>
+                                </div>
+                                <small id="error-new_password" class="error-text form-text text-danger">
+                                    @error('new_password') {{ $message }} @enderror
+                                </small>
+                            </div>
 
-                                    <div class="form-group">
-                                        <label for="confirm_password">Verifikasi Password</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="confirm_password" name="new_password_confirmation" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text toggle-password" toggle="#confirm_password">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <small id="error-confirm_password" class="error-text form-text text-danger">
-                                            @error('new_password_confirmation') {{ $message }} @enderror
-                                        </small>
+                            <div class="form-group">
+                                <label for="confirm_password">Verifikasi Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirm_password" name="new_password_confirmation">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text toggle-password" toggle="#confirm_password">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
                                     </div>
-
-                                    <div class="form-group text-right mt-4">
-                                        <button type="submit" class="btn btn-primary">Ubah Password</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <small id="error-confirm_password" class="error-text form-text text-danger">
+                                    @error('new_password_confirmation') {{ $message }} @enderror
+                                </small>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group text-right mt-4">
+                            <button type="submit" class="btn btn-primary" id="submit-btn">Simpan</button>
+                        </div>
+                    </form>
 
                     <!-- Modal for changing profile picture -->
                     <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
@@ -128,6 +113,7 @@
 
 <script>
     $(document).ready(function() {
+        // Toggle password visibility
         $('.toggle-password').click(function() {
             let input = $($(this).attr("toggle"));
             if (input.attr("type") === "password") {
@@ -137,20 +123,28 @@
             }
         });
 
-        @if(session('success'))
-            alert('{{ session('success') }}');
-        @endif
+        // Handle AJAX form submission for profile updates
+        $('#profile-form').submit(function(e) {
+            e.preventDefault(); // Prevent the form from submitting the traditional way
 
-        @if(session('error_type') === 'current_password')
-            alert('Password lama tidak sesuai');
-        @endif
+            let formData = $(this).serialize();
+            let actionUrl = $(this).attr('action');
 
-        @if(session('error_type') === 'new_password' || session('error_type') === 'new_password_confirmation')
-            $('#password-tab').tab('show'); // Aktifkan tab "Ubah Password"
-        @endif
+            $.ajax({
+                type: 'POST',
+                url: actionUrl,
+                data: formData,
+                success: function(response) {
+                    $('#notification-success').html(response.message).fadeIn().delay(3000).fadeOut();
+                },
+                error: function(xhr) {
+                    let errorMessage = xhr.responseJSON?.message || 'An error occurred';
+                    $('#notification-error').html(errorMessage).fadeIn().delay(3000).fadeOut();
+                }
+            });
+        });
     });
 </script>
-
 
 <!-- CSS Styling -->
 <style>
@@ -160,24 +154,15 @@
         padding: 20px;
     }
 
-    .nav-menu_profil .nav-link {
-        border-radius: 10px 10px 0 0;
-        border: 1px solid grey;
-        color: black;
-        background-color: white;
-    }
-
-    .nav-menu_profil .nav-link.active {
-        background-color: #007bff;
-        color: white;
-        border-color: #007bff;
-    }
-
     .form-group input {
         border: 1px solid #ccc;
         padding: 10px;
         border-radius: 5px;
     }
+
+    .alert {
+        display: none;
+        margin-bottom: 20px;
+    }
 </style>
-    
 @endsection

@@ -87,7 +87,6 @@ MALANG</span>
                     @foreach($penjualan as $p) 
                     <tr> 
                         <td class="text-center">{{ $loop->iteration }}</td> 
-                        <td> {{ $p->penjualan_id }}</td> 
                         <td> {{ $p->user->nama }}</td> 
                         <td> {{ $p->pembeli }}</td>
                         <td> {{ $p->penjualan_kode }}</td>  
