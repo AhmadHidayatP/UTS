@@ -58,8 +58,7 @@
 <body> 
     <table class="border-bottom-header"> 
         <tr> 
-            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.png') 
-}}"></td> 
+            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.png') }}"></td> 
             <td width="85%"> 
                 <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN 
 PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span> 
@@ -74,24 +73,28 @@ MALANG</span>
         </tr> 
     </table> 
  
-    <h3 class="text-center">LAPORAN DATA LEVEL</h4> 
+    <h3 class="text-center">LAPORAN DATA PENJUALAN</h4> 
     <table class="border-all"> 
         <thead> 
-            <tr> 
-                <th class="text-center">No</th> 
-                <th>Kode Level</th> 
-                <th>Nama Level</th> 
-            </tr> 
-        </thead> 
-        <tbody> 
-            @foreach($level as $l) 
-            <tr> 
-                <td class="text-center">{{ $loop->iteration }}</td> 
-                <td >{{ $l->level_kode }}</td> 
-                <td>{{ $l->level_nama }}</td> 
-            </tr>
-            @endforeach 
-</tbody> 
-</table> 
-</body> 
-</html>
+                <tr>
+                    <th>No</th>
+                    <th>Pegawai</th>
+                    <th>Pembeli</th>
+                    <th>Kode Penjualan</th>
+                    <th>Tanggal Penjualan</th>
+                </tr>
+                <tbody> 
+                    @foreach($penjualan as $p) 
+                    <tr> 
+                        <td class="text-center">{{ $loop->iteration }}</td> 
+                        <td> {{ $p->penjualan_id }}</td> 
+                        <td> {{ $p->user->nama }}</td> 
+                        <td> {{ $p->pembeli }}</td>
+                        <td> {{ $p->penjualan_kode }}</td>  
+                        <td> {{ $p->penjualan_tanggal }}</td> 
+                    </tr>
+                    @endforeach 
+        </tbody> 
+        </table>
+    </div>
+</div>

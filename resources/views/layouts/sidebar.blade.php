@@ -80,7 +80,7 @@
         </a> 
       </li> 
       <li class="nav-item"> 
-        <a href="{{ url('#') }}" class="nav-link {{ ($activeMenu == 
+        <a href="{{ url('penjualan') }}" class="nav-link {{ ($activeMenu == 
 'penjualan')? 'active' : '' }} "> 
           <i class="nav-icon fas fa-cash-register"></i> 
           <p>Transaksi Penjualan</p> 
@@ -90,7 +90,7 @@
       
       <li class="nav-item" id="logout"> 
         <a href="{{ url('/logout') }}" class="nav-link {{ ($activeMenu == 
-'penjualan')? 'active' : '' }} "> 
+'logout')? 'active' : '' }} "> 
           <i class="nav-icon fab fa-laravel"></i> 
           <p>Logout</p> 
         </a> 
